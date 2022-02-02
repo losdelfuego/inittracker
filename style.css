@@ -2,21 +2,21 @@ body {
 	background-color: #cacaca;
 }
 
-div#playerList { float: left; text-align: left; margin-top: 20px; }
+/* div#playerList { float: left; text-align: left; margin-top: 20px; } */
 ul { margin-left: -38px; }
 ul li { display: inline-block; text-align: left;  }
 span.delete, span.add{ cursor: pointer; }
 
-table { display: inline-table; margin: 50px 20px 20px 80px; text-transform: capitalize; text-align: center; border-style: double; position: relative; width: auto; height: auto; float: none; top: 10px; padding-left: 20px; padding-right: 20px; }
+/* table { display: inline-table; margin: 50px 20px 20px 80px; text-transform: capitalize; text-align: center; border-style: double; position: relative; width: auto; height: auto; float: none; top: 10px; padding-left: 20px; padding-right: 20px; } */
 
-table th {
+/* table th { */
 	font-size: 12px;
 	font-weight: bold;
 	font-style: italic;
 	text-decoration: underline;
 }
 
-table tr:hover {
+/* table tr:hover { */
 	border-style: solid;
 	color: green;
 	text-shadow: 1px 1px 1px #e1dede;

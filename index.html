@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
-<!-- Init Tracker v4.2, 14Jan2019
+<!-- Init Tracker v5, 02Feb2021
 Changelog:
-- "goes first" checkbox
+Full redesign using Bootstrap
 -->
 
 <html><head>
@@ -10,44 +10,85 @@ Changelog:
   <title>RPG Initiative Tracker 4.2</title>
   <script src="scripts/jquery-latest.js"></script>
   <script src="scripts/jquery.sort.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css#030817">
 </head>
 
 <body>
+	<div class="container">
+			<div id="playerList" class="playerList pt-5">
+				<form class="row gx-2 gy-3 align-items-center">
+					<div class="col-auto">
+						<div class="input-group">
+							<div class="input-group-text">
+								<input id="goesfirst" class="form-check-input mt-0" type="checkbox" role="switch">
+							</div>
+							<input id="name" type="text" class="form-control name" placeholder="Character Name" onclick="this.select()">
+						</div>
+					</div>
 
-<div id="playerList" class="playerList">
+					<div class="col-5">
+						<div class="input-group">
+							<input id="init" type="number" class="form-control" placeholder="10" onclick="this.select()">
+							<input id="perc" type="number" class="form-control" placeholder="10" onclick="this.select()">
+							<input id="ac" type="number" class="form-control" placeholder="10" onclick="this.select()">
+							<input id="dam" type="number" class="form-control" placeholder="10" onclick="this.select()">
+							<input id="sneak" type="number" class="form-control" placeholder="10" onclick="this.select()">
+							<input id="disguise" type="number" class="form-control" placeholder="10" onclick="this.select()">	
+						</div>
+					</div>
 
-<span class="add" id="add" >[+]</span>
-<input type='checkbox' id='sortcheck' name='sortcheck'/>Ascending
-				
-	<ul class="player">
-		<li><input id="goesfirst" class="goesfirst" type="checkbox"></li>
-		<li><input id="name" class="name" value="Character Name" type="text" onclick="this.select()"></li>
-		<li><input id="init" value="10" min="-100" max="100" type="number" onclick="this.select()"></li>
-		<li><input id="perc" value="10" min="-100" max="100" type="number" onclick="this.select()"></li>
-		<li><input id="ac" value="10" min="-100" max="100" type="number" onclick="this.select()"></li>
-		<li><input id="dam" value="0" min="-100" max="100" type="number" onclick="this.select()"></li>
-		<li><input id="sneak" value="0" min="-100" max="100" type="number" onclick="this.select()"></li>
-		<li><input id="disguise" value="0" min="0" max="100" type="number" onclick="this.select()"></li>
+
+
+
+					<div class="col">
+						<div class="btn-group" role="group">
+							<button id="minus1" class="btn btn-outline-primary" type="button">-1</button>
+							<button id="minus5" class="btn btn-outline-primary" type="button">-5</button>
+							<button id="minus10" class="btn btn-outline-primary" type="button">-10</button>
+							<button id="delete" class="btn btn-danger delete" type="button">[x]</button>
 		
-		<li><input type="button" id="minus1" value="-1" /></li>
-		<li><input type="button" id="minus5" value="-5" /></li>
-		<li><input type="button" id="minus10" value="-10" /></li>
-		<li><span class="delete">[-]</span></li>
-	</ul>
+						</div>
+					</div>
+				</form>
+
+
+			</div>
+
+			<div class="row">
+				<div class="col-2 gy-3">
+					<button id="add" class="btn btn-success" type="button">Add row</button>
+				</div>
+			</div>
+
+			<div class="row">
+				<div id="inittable">
+					<div class="col pt-5">
+						<table id="initiative" class="initiative table table-sm table-striped table-dark table-hover">
+							<thead><tr><th scope="col">Name</th><th class="sortvalue" scope="col"></th><th class="table_init" scope="col">Initiative</th><th class="table_perc" scope="col">Perception</th><th class="table_ac" scope="col">Armor</th><th class="table_dam" scope="col">Damage</th><th class="table_sneak" scope="col">Sneaking</th><th class="table_disguise" scope="col">Disguise</th></tr></thead>
+							<tbody></tbody>
+						</table>
+	
+					</div>
+				</div>
+				
+
+			</div>
+
+		
+	</div>
+
+
+
+	<!-- <input type='checkbox' id='sortcheck' name='sortcheck'/>Ascending -->
+					
 	
 
 	
-</div>
 
-<div id="inittable">
-<table id="initiative" class="initiative">
-	<thead><tr><th>Name</th><th class="sortvalue"></th><th class="table_init">Initiative</th><th class="table_perc">Perception</th><th class="table_ac">Armor</th><th class="table_dam">Damage</th><th class="table_sneak">Sneaking</th><th class="table_disguise">Disguise</th></tr></thead>
-	<tbody></tbody>
-</table>
-</div>
 
-<div id="dice">
+<!-- <div id="dice">
 	<form action="">
 		<input type="radio" name="roll_type" id="1d100" value="1d100" checked="checked" />1d100<br>
 		<input type="radio" name="roll_type" id="2d100" value="2d100" />2d100/2<br>
@@ -57,14 +98,14 @@ Changelog:
 
 	<button onclick="roll_dice()">Roll</button>
 	<p id="dice_result"></p>
-</div>
+</div> -->
 
 
-<div id="description">
+<!-- <div id="description">
 	<h1>RPG Initiative Tracker</h1>
 	<h2>Version 4.2 / Jan 14 2019</h2>
 	<h2><a href="InitTracker4.2.zip">Download</a></h2>
-</div>
+</div> -->
 
 
 
@@ -75,34 +116,36 @@ Changelog:
 		
 		UpdateResultsFn();
 
-		$("#playerList #add").click(function () { AddPlayerRow(); UpdateResultsFn(); });
+		$("#add").click(function () { AddPlayerRow(); UpdateResultsFn(); });
 		
 		// we use the .on() method here because the "[del]" control is created dynamically via the AddPlayerRow() method - $(".delete").click() won't work because the ".delete" buttons doesn't exist yet!
 		$("#playerList").on("click", ".delete", function () {
 		//	var cont = confirm('Delete Row?');
 		//		if(cont) {
-					if ($("#playerList ul").length <= 1) { alert("Can't delete last character."); return; }
-					$(this).parents("ul").remove();
+					if ($("#playerList form").length <= 1) { alert("Can't delete last character."); return; }
+					$(this).parents("form").remove();
 					UpdateResultsFn();
 		//		}
 			event.preventDefault();
 		});
 
 		$('#playerList').on("click", "#minus1", function() {
-			var newInit = $(this).parents("ul").find('#init').val() - 1;
-			$(this).parents("ul").find('#init').val(newInit);
+			var newInit = $(this).parents("form").find('#init').val() - 1;
+			$(this).parents("form").find('#init').val(newInit);
 			UpdateResultsFn();
 		});
 
 		$('#playerList').on("click", "#minus5", function() {
-			var newInit = $(this).parents("ul").find('#init').val() - 5;
-			$(this).parents("ul").find('#init').val(newInit);
+			console.log("minus 5");
+			var newInit = $(this).parents("form").find('#init').val() - 5;
+			$(this).parents("form").find('#init').val(newInit);
 			UpdateResultsFn();
 		});
 
 		$('#playerList').on("click", "#minus10", function() {
-			var newInit = $(this).parents("ul").find('#init').val() - 10;
-			$(this).parents("ul").find('#init').val(newInit);
+			console.log("minus 10");
+			var newInit = $(this).parents("form").find('#init').val() - 10;
+			$(this).parents("form").find('#init').val(newInit);
 			UpdateResultsFn();
 		});
 		
@@ -112,11 +155,11 @@ Changelog:
 		    var th = jQuery('th');
 		    th.click(function(){
 		    
-			if ($('#sortcheck').prop('checked')) {
-		        var inverse = false;
-		    } else {
-		        var inverse = true;
-		    } 
+				if ($('#sortcheck').prop('checked')) {
+					var inverse = false;
+				} else {
+					var inverse = true;
+				} 
 			
 		
 		        var header = $(this),
@@ -149,21 +192,13 @@ Changelog:
 
 	function AddPlayerRow() {
 		// make a copy of the first UL in the player list, update its input controls' values and append it to the bottom of the list
-		var newUL = $("#playerList ul:first").clone();
-		newUL.find("#name").val("Character Name");
-		newUL.find("#init").val("10");
-		newUL.find("#perc").val("10");
-		newUL.find("#ac").val("10");
-		newUL.find("#dam").val("0");
-		newUL.find("#sneak").val("0");
-		newUL.find("#disguise").val("0");
-		
-		$("#playerList ul:last").after(newUL);
+		var newUL = $("#playerList form").last().clone();
+		$("#playerList form").last().after(newUL);
 	}
 	
 	function UpdateResultsFn() {
 		$("#initiative tbody").empty();
-		$("#playerList ul").each(function () {
+		$("#playerList form").each(function () {
 			
 			// try to implement a "goes first" button
 //			if ($(this).find("goesfirst").prop('checked')) {
