@@ -1,28 +1,28 @@
-body {
+/* body {
 	background-color: #cacaca;
-}
+} */
 
 /* div#playerList { float: left; text-align: left; margin-top: 20px; } */
-ul { margin-left: -38px; }
+/* ul { margin-left: -38px; }
 ul li { display: inline-block; text-align: left;  }
 span.delete, span.add{ cursor: pointer; }
-
+ */
 /* table { display: inline-table; margin: 50px 20px 20px 80px; text-transform: capitalize; text-align: center; border-style: double; position: relative; width: auto; height: auto; float: none; top: 10px; padding-left: 20px; padding-right: 20px; } */
 
 /* table th { */
-	font-size: 12px;
+	/* font-size: 12px;
 	font-weight: bold;
 	font-style: italic;
 	text-decoration: underline;
-}
+} */
 
 /* table tr:hover { */
-	border-style: solid;
+	/* border-style: solid;
 	color: green;
 	text-shadow: 1px 1px 1px #e1dede;
-}
+} */
 
-div#description {
+/* div#description {
 	float: right;
 	clear: right;
 	text-align: justify;
@@ -35,7 +35,7 @@ h1 {
 
 h2 {
 	font-size: 10px;
-}
+} */
 
 #dice {
 	position: relative;
@@ -120,9 +120,9 @@ h2 {
 	display: none;
 }
 
-input[type=number]{
+/* input[type=number]{
     width: 2em;
-} 
+}  */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
