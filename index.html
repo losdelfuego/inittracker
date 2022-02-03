@@ -30,12 +30,12 @@ Full redesign using Bootstrap
 
 					<div class="col-5">
 						<div class="input-group">
-							<input id="init" type="number" class="form-control" placeholder="10" value="10" onclick="this.select()">
-							<input id="perc" type="number" class="form-control" placeholder="10" onclick="this.select()">
-							<input id="ac" type="number" class="form-control" placeholder="10" onclick="this.select()">
-							<input id="dam" type="number" class="form-control" placeholder="10" onclick="this.select()">
-							<input id="sneak" type="number" class="form-control" placeholder="10" onclick="this.select()">
-							<input id="disguise" type="number" class="form-control" placeholder="10" onclick="this.select()">	
+							<input id="init" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">
+							<input id="perc" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">
+							<input id="ac" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">
+							<input id="dam" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">
+							<input id="sneak" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">
+							<input id="disguise" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">	
 						</div>
 					</div>
 
@@ -185,7 +185,7 @@ Full redesign using Bootstrap
 
 
 	function AddPlayerRow() {
-		// make a copy of the first UL in the player list, update its input controls' values and append it to the bottom of the list
+		// make a copy of the last row in the player list and append it to the bottom of the list
 		var newUL = $("#playerList form").last().clone();
 		$("#playerList form").last().after(newUL);
 	}
@@ -236,30 +236,30 @@ Full redesign using Bootstrap
 		
 	}
 	
-	function roll_dice() {
-		if ( $("#1d100").is(':checked') == true ) { 
-			var diceone = Math.floor(Math.random() * 100);
-			var dice_result = diceone;
-			}
-		else if ( $("#2d100").is(':checked') == true ) {
-			var diceone = Math.floor(Math.random() * 100);
-			var dicetwo = Math.floor(Math.random() * 100);
-			var dice_result = Math.floor(( +diceone + +dicetwo ) / 2);
-			}
-		else if ( $("#3d6").is(':checked') == true ) {
-			var diceone = Math.floor(( Math.random() * 6) + 1);
-			var dicetwo = Math.floor(( Math.random() * 6) + 1);
-			var dicethree = Math.floor(( Math.random() * 6) +1);
-			var dice_result = Math.floor( +diceone + +dicetwo + +dicethree);
-			}
-		else if ( $("#1d20").is(':checked') == true ) {
-			var diceone = Math.floor(( Math.random() * 20) + 1);
-			var dice_result = diceone;
-		}
+	// function roll_dice() {
+	// 	if ( $("#1d100").is(':checked') == true ) { 
+	// 		var diceone = Math.floor(Math.random() * 100);
+	// 		var dice_result = diceone;
+	// 		}
+	// 	else if ( $("#2d100").is(':checked') == true ) {
+	// 		var diceone = Math.floor(Math.random() * 100);
+	// 		var dicetwo = Math.floor(Math.random() * 100);
+	// 		var dice_result = Math.floor(( +diceone + +dicetwo ) / 2);
+	// 		}
+	// 	else if ( $("#3d6").is(':checked') == true ) {
+	// 		var diceone = Math.floor(( Math.random() * 6) + 1);
+	// 		var dicetwo = Math.floor(( Math.random() * 6) + 1);
+	// 		var dicethree = Math.floor(( Math.random() * 6) +1);
+	// 		var dice_result = Math.floor( +diceone + +dicetwo + +dicethree);
+	// 		}
+	// 	else if ( $("#1d20").is(':checked') == true ) {
+	// 		var diceone = Math.floor(( Math.random() * 20) + 1);
+	// 		var dice_result = diceone;
+	// 	}
 		
-		$('#dice_result').html(('0'+dice_result).slice(-2));
+	// 	$('#dice_result').html(('0'+dice_result).slice(-2));
 		
-		}
+	// 	}
 	
 	
 	
