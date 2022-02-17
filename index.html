@@ -5,6 +5,7 @@ Changelog:
 5.1
 -Added tooltips to all form elements
 -Using newest JQuery from CDN
+-Added keyboard listener for new rows
 
 5.0
 Full redesign using Bootstrap
@@ -63,7 +64,7 @@ Full redesign using Bootstrap
 
 			<div class="row">
 				<div class="col-2 gy-3">
-					<button id="add" class="btn btn-success" type="button">Add row</button>
+					<button id="add" class="btn btn-success" title="Add a row (+)" type="button">Add row</button>
 				</div>
 			</div>
 
@@ -110,13 +111,19 @@ Full redesign using Bootstrap
 
 <script>
 	$(document).ready(function () {
+		//listen for + to add a row
+		$(document).keydown(function (key){
+			if (key.which == 187) {
+				AddPlayerRow();
+			}
+		})
 
 		// pre-populate the list with five additional players (the original plus five more for a total of six)
 		for (i = 1; i < 6; i++) AddPlayerRow();
 
 		UpdateResultsFn();
 
-		$("#add").click(function () { AddPlayerRow(); UpdateResultsFn(); });
+		$("#add").click(function () { AddPlayerRow(); });
 
 		// we use the .on() method here because the "[del]" control is created dynamically via the AddPlayerRow() method - $(".delete").click() won't work because the ".delete" buttons doesn't exist yet!
 		$("#playerList").on("click", ".delete", function () {
@@ -190,10 +197,12 @@ Full redesign using Bootstrap
 
 
 
+
 	function AddPlayerRow() {
 		// make a copy of the last row in the player list and append it to the bottom of the list
 		var newUL = $("#playerList form").last().clone();
 		$("#playerList form").last().after(newUL);
+		UpdateResultsFn();
 	}
 
 	function UpdateResultsFn() {
