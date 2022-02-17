@@ -201,6 +201,7 @@ Full redesign using Bootstrap
 		var newUL = $("#playerList form").last().clone();
 		$("#playerList form").last().after(newUL);
 		$("#add").tooltip('update');
+		$("#add").blur();
 		UpdateResultsFn();
 	}
 
