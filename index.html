@@ -1,14 +1,19 @@
 
 <!DOCTYPE html>
-<!-- Init Tracker v5, 02Feb2021
+<!-- Init Tracker v5.1, 17Feb2021
 Changelog:
+5.1
+-Added tooltips to all form elements
+-Using newest JQuery from CDN
+
+5.0
 Full redesign using Bootstrap
 -->
 
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=windows-1252">
-  <title>RPG Initiative Tracker 5.0</title>
-  <script src="scripts/jquery-latest.js"></script>
+  <title>RPG Initiative Tracker 5.1</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="scripts/jquery.sort.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -22,20 +27,20 @@ Full redesign using Bootstrap
 					<div class="col-auto">
 						<div class="input-group">
 							<div class="input-group-text">
-								<input id="goesfirst" class="form-check-input mt-0" type="checkbox" role="switch">
+								<input id="goesfirst" class="form-check-input mt-0" type="checkbox" role="switch" title="Goes First?">
 							</div>
-							<input id="name" type="text" class="form-control name" placeholder="Character Name" value="Runner" onclick="this.select()">
+							<input id="name" type="text" class="form-control name" placeholder="Character Name" title="Character Name" value="Runner" onclick="this.select()">
 						</div>
 					</div>
 
 					<div class="col-5">
 						<div class="input-group">
-							<input id="init" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">
-							<input id="perc" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">
-							<input id="ac" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">
-							<input id="dam" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">
-							<input id="sneak" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">
-							<input id="disguise" type="number" class="form-control" placeholder="0" value="0" onclick="this.select()">	
+							<input id="init" type="number" class="form-control" placeholder="0" value="0" title="Initiative" onclick="this.select()">
+							<input id="perc" type="number" class="form-control" placeholder="0" value="0" title="Perception" onclick="this.select()">
+							<input id="ac" type="number" class="form-control" placeholder="0" value="0" title="Armor" onclick="this.select()">
+							<input id="dam" type="number" class="form-control" placeholder="0" value="0" title="Damage" onclick="this.select()">
+							<input id="sneak" type="number" class="form-control" placeholder="0" value="0" title="Sneaking" onclick="this.select()">
+							<input id="disguise" type="number" class="form-control" placeholder="0" value="0" title="Disguise" onclick="this.select()">
 						</div>
 					</div>
 
@@ -44,11 +49,11 @@ Full redesign using Bootstrap
 
 					<div class="col">
 						<div class="btn-group" role="group">
-							<button id="minus1" class="btn btn-outline-primary" type="button">-1</button>
-							<button id="minus5" class="btn btn-outline-primary" type="button">-5</button>
-							<button id="minus10" class="btn btn-outline-primary" type="button">-10</button>
-							<button id="delete" class="btn btn-danger delete" type="button">[x]</button>
-		
+							<button id="minus1" class="btn btn-outline-primary" title="-1 to Initiative" type="button">-1</button>
+							<button id="minus5" class="btn btn-outline-primary" title="-5 to Initiative" type="button">-5</button>
+							<button id="minus10" class="btn btn-outline-primary" title="-10 to Initiative" type="button">-10</button>
+							<button id="delete" class="btn btn-danger delete" title="Delete Row" type="button">[x]</button>
+
 						</div>
 					</div>
 				</form>
@@ -69,14 +74,14 @@ Full redesign using Bootstrap
 							<thead><tr><th scope="col">Name</th><th class="sortvalue" scope="col"></th><th class="table_init" scope="col">Initiative</th><th class="table_perc" scope="col">Perception</th><th class="table_ac" scope="col">Armor</th><th class="table_dam" scope="col">Damage</th><th class="table_sneak" scope="col">Sneaking</th><th class="table_disguise" scope="col">Disguise</th></tr></thead>
 							<tbody></tbody>
 						</table>
-	
+
 					</div>
 				</div>
-				
+
 
 			</div>
 
-		
+
 	</div>
 
 
@@ -105,13 +110,14 @@ Full redesign using Bootstrap
 
 <script>
 	$(document).ready(function () {
+
 		// pre-populate the list with five additional players (the original plus five more for a total of six)
 		for (i = 1; i < 6; i++) AddPlayerRow();
-		
+
 		UpdateResultsFn();
 
 		$("#add").click(function () { AddPlayerRow(); UpdateResultsFn(); });
-		
+
 		// we use the .on() method here because the "[del]" control is created dynamically via the AddPlayerRow() method - $(".delete").click() won't work because the ".delete" buttons doesn't exist yet!
 		$("#playerList").on("click", ".delete", function () {
 		//	var cont = confirm('Delete Row?');
@@ -142,20 +148,20 @@ Full redesign using Bootstrap
 			$(this).parents("form").find('#init').val(newInit);
 			UpdateResultsFn();
 		});
-		
+
 		$('#playerList').on('change', 'input', function() {	UpdateResultsFn(); });
-		
+
 		// some sort of weird table column sorting algo
 		    var th = jQuery('th');
 		    th.click(function(){
-		    
+
 				if ($('#sortcheck').prop('checked')) {
 					var inverse = false;
 				} else {
 					var inverse = true;
-				} 
-			
-		
+				}
+
+
 		        var header = $(this),
 		            index = header.index();
 		        header
@@ -165,17 +171,17 @@ Full redesign using Bootstrap
 		                return $(this).index() === index;
 		            })
 		            .sort(function(a, b){
-		                
+
 		                a = $(a).text();
 		                b = $(b).text();
-		                
+
 		                return (
 		                    isNaN(a) || isNaN(b) ?
 		                        a > b : +a > +b
 		                    ) ?
 		                        inverse ? -1 : 1 :
 		                        inverse ? 1 : -1;
-		                    
+
 		            }, function(){
 		                return this.parentNode;
 		            });
@@ -189,11 +195,11 @@ Full redesign using Bootstrap
 		var newUL = $("#playerList form").last().clone();
 		$("#playerList form").last().after(newUL);
 	}
-	
+
 	function UpdateResultsFn() {
 		$("#initiative tbody").empty();
 		$("#playerList form").each(function () {
-			
+
 			ordermodifier=$(this).find("#init").val();
 			initval=$(this).find("#init").val();
 			percval=$(this).find("#perc").val();
@@ -201,24 +207,24 @@ Full redesign using Bootstrap
 			damval=$(this).find("#dam").val();
 			sneakval=$(this).find("#sneak").val();
 			disguiseval=$(this).find("#disguise").val();
-			
+
 			if($(this).find("#goesfirst").prop('checked')) {
 				ordermodifier = parseInt(ordermodifier) + 100;
 				}
-			
-			
-			
-			
+
+
+
+
 			$("#initiative tbody").append("<tr><td>" + $(this).find("#name").val() + "</td><td class=\"sortvalue\">" + ordermodifier +	"</td><td class=\"table_init\">" + initval + "</td><td class=\"table_perc\">" + percval + "</td><td class=\"table_ac\">" + acval + "</td><td class=\"table_dam\">" + damval + "</td><td class=\"table_sneak\">" + sneakval + "</td><td class=\"table_disguise\">" + disguiseval + "</tr>");
-			
+
 
 			});
 
 
-			
+
 		// automatically sort by the "Initative" column
 		$('#initiative th:eq(1)').click();
-		
+
 		// Count the number of text fields and set it up so that "enter" moves to the next one
 		$(".name").keyup(function (event) {
 			if (event.keyCode == 13) {
@@ -233,11 +239,14 @@ Full redesign using Bootstrap
 				return false;
 			}
 		});
-		
+		//show tooltips for input elements
+		$('input').tooltip();
+		$('button').tooltip();
+
 	}
-	
+
 	// function roll_dice() {
-	// 	if ( $("#1d100").is(':checked') == true ) { 
+	// 	if ( $("#1d100").is(':checked') == true ) {
 	// 		var diceone = Math.floor(Math.random() * 100);
 	// 		var dice_result = diceone;
 	// 		}
@@ -256,13 +265,13 @@ Full redesign using Bootstrap
 	// 		var diceone = Math.floor(( Math.random() * 20) + 1);
 	// 		var dice_result = diceone;
 	// 	}
-		
+
 	// 	$('#dice_result').html(('0'+dice_result).slice(-2));
-		
+
 	// 	}
-	
-	
-	
+
+
+
 </script>
 </body>
 
