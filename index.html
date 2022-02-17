@@ -200,6 +200,7 @@ Full redesign using Bootstrap
 		// make a copy of the last row in the player list and append it to the bottom of the list
 		var newUL = $("#playerList form").last().clone();
 		$("#playerList form").last().after(newUL);
+		$("#add").tooltip('update');
 		UpdateResultsFn();
 	}
 
