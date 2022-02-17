@@ -127,12 +127,10 @@ Full redesign using Bootstrap
 
 		// we use the .on() method here because the "[del]" control is created dynamically via the AddPlayerRow() method - $(".delete").click() won't work because the ".delete" buttons doesn't exist yet!
 		$("#playerList").on("click", ".delete", function () {
-		//	var cont = confirm('Delete Row?');
-		//		if(cont) {
-					if ($("#playerList form").length <= 1) { alert("Can't delete last character."); return; }
-					$(this).parents("form").remove();
-					UpdateResultsFn();
-		//		}
+			if ($("#playerList form").length <= 1) { alert("Can't delete last character."); return; }
+			$(this).tooltip('dispose');
+			$(this).parents("form").remove();
+			UpdateResultsFn();
 			event.preventDefault();
 		});
 
