@@ -22,7 +22,7 @@ Full redesign using Bootstrap
 </head>
 
 <body>
-	<div class="container">
+	<div class="container" tabindex="0" id="testdiv">
 			<div id="playerList" class="playerList pt-5">
 				<form class="row gx-2 pb-1 align-items-center">
 					<div class="col-auto">
@@ -112,8 +112,9 @@ Full redesign using Bootstrap
 <script>
 	$(document).ready(function () {
 		//listen for + to add a row
-		$(document).keydown(function (key){
-			if (key.which == 187) {
+		$("#testdiv").keydown(function (key){
+			// console.log(key)
+			if (key.key == "=") {
 				AddPlayerRow();
 			}
 		})
