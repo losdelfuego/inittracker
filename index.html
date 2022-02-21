@@ -112,7 +112,7 @@ Full redesign using Bootstrap
 <script>
 	$(document).ready(function () {
 		//listen for + to add a row
-		$("#testdiv").keydown(function (key){
+		$(document).keydown(function (key){
 			// console.log(key)
 			if (key.key == "=") {
 				AddPlayerRow();
